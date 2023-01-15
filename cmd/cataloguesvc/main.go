@@ -19,8 +19,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"github.com/microservices-demo/catalogue"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/sqwatch-demo/catalogue"
 	"github.com/weaveworks/common/middleware"
 	"golang.org/x/net/context"
 )
@@ -116,7 +116,7 @@ func main() {
 	// Check if DB connection can be made, only for logging purposes, should not fail/exit
 	err = db.Ping()
 	if err != nil {
-		logger.Log("Error", "Unable to connect to Database", "DSN", dsn)
+		logger.Log("Error", "Unable to connect to Database", "DSN", dsn, "err", err)
 	}
 
 	// Service domain.
