@@ -1,7 +1,8 @@
-NAME = weaveworksdemos/catalogue
-DBNAME = weaveworksdemos/catalogue-db
+NAME = sqwatch-demo/catalogue
+DBNAME = sqwatch-demo/catalogue-db
 
-TAG=$(TRAVIS_COMMIT)
+TAG ?= latest
+BUILDER ?= minikube image
 
 INSTANCE = catalogue
 
@@ -10,7 +11,10 @@ INSTANCE = catalogue
 default: test
 
 release:
-	docker build -t $(NAME) -f ./docker/catalogue/Dockerfile .
+	$(BUILDER) build -t $(NAME):$(TAG) -f docker/catalogue/Dockerfile .
+
+release-db:
+	$(BUILDER) build -t $(DBNAME):$(TAG) -f Dockerfile docker/catalogue-db
 
 test: 
 	GROUP=weaveworksdemos COMMIT=test ./scripts/build.sh
