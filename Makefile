@@ -1,5 +1,5 @@
-NAME = sqwatch-demo/catalogue
-DBNAME = sqwatch-demo/catalogue-db
+NAME = sqwatchio/catalogue
+DBNAME = sqwatchio/catalogue-db
 
 TAG ?= latest
 BUILDER ?= minikube image
@@ -14,7 +14,7 @@ release:
 	$(BUILDER) build -t $(NAME):$(TAG) -f docker/catalogue/Dockerfile .
 
 release-db:
-	$(BUILDER) build -t $(DBNAME):$(TAG) -f Dockerfile docker/catalogue-db
+	$(BUILDER) build -t $(DBNAME):$(TAG) -f docker/catalogue-db/Dockerfile docker/catalogue-db
 
 test: 
 	GROUP=weaveworksdemos COMMIT=test ./scripts/build.sh
